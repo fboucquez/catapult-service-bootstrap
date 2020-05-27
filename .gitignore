@@ -13,3 +13,4 @@ catapult-rest/*
 ruby/*.gem
 ruby/spec/config_generation/output
 *.bak
+/.idea/

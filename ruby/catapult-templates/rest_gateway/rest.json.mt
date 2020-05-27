@@ -2,7 +2,7 @@
   "network": {
     "name": "publicTest",
     "description": "catapult development network",
-    "propertiesFilePath": "/api-node-config/config-network.properties"
+    "propertiesFilePath": "{{api_node_config_path}}/config-network.properties"
   },
 
   "port": 3000,
@@ -24,7 +24,7 @@
     "transfer"
   ],
   "db": {
-    "url": "mongodb://db:27017/",
+    "url": "mongodb://{{db_host}}:27017/",
     "name": "catapult",
     "pageSizeMin": 10,
     "pageSizeMax": 100,
@@ -35,9 +35,9 @@
   "apiNode": {
     "host": "{{api_node_host}}",
     "port": 7900,
-    "tlsClientCertificatePath": "/api-node-config/cert/node.crt.pem",
-    "tlsClientKeyPath": "/api-node-config/cert/node.key.pem",
-    "tlsCaCertificatePath": "/api-node-config/cert/ca.cert.pem",
+    "tlsClientCertificatePath": "{{api_node_config_path}}/cert/node.crt.pem",
+    "tlsClientKeyPath": "{{api_node_config_path}}/cert/node.key.pem",
+    "tlsCaCertificatePath": "{{api_node_config_path}}/cert/ca.cert.pem",
     "timeout": 1000
   },
 

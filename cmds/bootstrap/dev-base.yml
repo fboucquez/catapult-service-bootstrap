@@ -62,6 +62,8 @@ services:
     image: mongo
     command: bash -c "mongod --dbpath=/dbdata --bind_ip=db"
     stop_signal: SIGINT
+    ports:
+      - "27017:27017"
     volumes:
     - ../../data/mongo:/dbdata:rw
     - ../../bin/bash:/bin-mount
@@ -147,6 +149,8 @@ services:
     build: dockerfiles/catapult
     command: bash -c "/bin-mount/wait /state/api-node-0-nemgen && /bin-mount/wait /state/api-node-0-broker && /bin/bash /userconfig/startApiServer.sh"
     stop_signal: SIGINT
+    ports:
+      - "7900:7900"
     restart: on-failure:2
     volumes:
     - ../../build/catapult-config/api-node-0/userconfig/resources/:/userconfig/resources/
@@ -162,6 +166,8 @@ services:
     build: dockerfiles/catapult
     command: bash -c "/bin-mount/wait /state/api-node-0-nemgen && /bin/bash /userconfig/runServerRecover.sh && /bin/bash /userconfig/startBroker.sh"
     stop_signal: SIGINT
+    ports:
+      - "7902:7902"
     restart: on-failure:2
     volumes:
     - ../../build/catapult-config/api-node-0/userconfig/resources/:/userconfig/resources/

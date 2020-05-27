@@ -21,12 +21,14 @@ module Catapult::Bootstrap
       attr_reader :component_keys
       
       def hash(index)
-        {
-          rest_gateway_private_key: rest_gateway_private_key(index),
-          api_node_host: api_node_host(index),
-          api_node_broker_host: api_node_broker_host(index),
-          api_node_public_key: api_node_public_key(index)
-        }
+          {
+              api_node_config_path: "/api-node-config",
+              rest_gateway_private_key: rest_gateway_private_key(index),
+              db_host: "db",
+              api_node_host: api_node_host(index),
+              api_node_broker_host: api_node_broker_host(index),
+              api_node_public_key: api_node_public_key(index)
+          }
       end
       
       private

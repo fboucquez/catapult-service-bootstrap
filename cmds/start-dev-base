@@ -15,4 +15,5 @@ while [ "$1" != "" ]; do
     shift
 done
 
+docker rm -f $(docker ps -aq)
 docker-compose -f cmds/bootstrap/dev-base.yml up $daemon_flag $build_flag
