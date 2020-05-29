@@ -139,3 +139,4 @@ Check everything is running by going to http://localhost:3000/node/info and http
 Note:
 1. `./cmds/start-all` still runs without resetting bootstrap
 2. There is no need of creating or deploying docker images for rest in this setup. 
+3. Tested in Mac and Ubuntu
