@@ -10,9 +10,9 @@ cd $restPath
 #
 #copy "127.0.0.1       db api-node-broker-0 api-node-0" into /etc/hosts
 
-# Create symlink
-#
-#run from "sudo ln -s $PWD/build/catapult-config/api-node-0/userconfig/resources /api-node-config"
+# RUN:
+# sudo mkdir /usr/local/share/symbol
+# sudo ln -s $PWD/build/catapult-config/api-node-0/userconfig/resources /usr/local/share/symbol/api-node-config
 
 
 npm install -g yarn

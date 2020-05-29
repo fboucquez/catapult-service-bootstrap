@@ -22,7 +22,7 @@ module Catapult::Bootstrap
       
       def hash(index)
           {
-              api_node_config_path: "/api-node-config",
+              api_node_config_path: "/usr/local/share/symbol/api-node-config",
               rest_gateway_private_key: rest_gateway_private_key(index),
               db_host: "db",
               api_node_host: api_node_host(index),
