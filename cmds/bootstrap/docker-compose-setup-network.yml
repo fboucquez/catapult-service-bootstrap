@@ -23,7 +23,7 @@ services:
     command: bash -c "/usr/app/bin/setup-network.rb && touch /state/configs-generated"
     environment:
     - ADDRESSES_DIR=/addresses
-    - BASE_CONFIG_DIR=/config-build 
+    - BASE_CONFIG_DIR=/config-build
     - BASE_DATA_DIR=/data
     - NEMESIS_DIR=/nemesis
     volumes:

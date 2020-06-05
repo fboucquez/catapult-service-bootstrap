@@ -6,4 +6,4 @@ harvesterVrfPrivateKey = {{harvester_vrf_private_key}}
 enableAutoHarvesting = true
 maxUnlockedAccounts = 5
 delegatePrioritizationPolicy = Importance
-beneficiaryAddress =  
+beneficiaryAddress =
