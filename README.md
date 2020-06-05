@@ -114,3 +114,29 @@ If your service is in a bad state, or you just want to restart from fresh again 
 The Catapult cache and query engine is powered by mongodb.  There are some known issues with the latest storage engine in some docker environments.  The previous temporary fix was to use an older version with a custom docker compose file, that has been removed in the dragon release, please submit an issue if running into it and we can look at resurecting it.
 
 It has been reported that some older hosting and x86 chipsets are failing to start services. Currently main build targets for server releases are for more modern chipsets, if experiencing issues please report in the community developer slack group.
+
+
+## Installation & Startup for Rest Dev Mode 
+
+These steps are required if you are planning on running bootstrap without rest docker next to a local rest. This will allow you to:
+- Run the latest rest from a branch
+- Debug rest locally if necessary
+
+The steps are:
+1. Clone https://github.com/nemtech/catapult-rest inside the same parent folder of this catapult-rest-bootstrap
+2. Update your `/etc/hosts` adding the line `127.0.0.1 db api-node-broker-0 api-node-0`
+3. Run `sudo mkdir /usr/local/share/symbol`
+4. IN THIS catapult-service-bootstrap folder, run: `sudo ln -s $PWD/build/catapult-config/api-node-0/userconfig/resources /usr/local/share/symbol/api-node-config`
+5. Run `sudo ./cmds/clean-all`
+
+Once the set up is ready run:
+
+1. `./cmds/start-dev-base`
+2. `./cmds/start-rest-from-code.sh`
+
+Check everything is running by going to http://localhost:3000/node/info and http://localhost:3000/blocks/1
+
+Note:
+1. `./cmds/start-all` still runs without resetting bootstrap
+2. There is no need of creating or deploying docker images for rest in this setup. 
+3. Tested in Mac and Ubuntu
