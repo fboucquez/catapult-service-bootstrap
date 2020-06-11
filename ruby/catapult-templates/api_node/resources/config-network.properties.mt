@@ -37,7 +37,7 @@ minVoterBalance = 50'000
 
 harvestBeneficiaryPercentage = 10
 harvestNetworkPercentage = 5
-harvestNetworkFeeSinkAddress = SBPJ3LE4SF7Y25RCEC6MA5BXBP6W2TGB2XKMIDY
+harvestNetworkFeeSinkAddress = TDGY4DD2U4YQQGERFMDQYHPYS6M7LHIF6XUCJ4Q
 
 blockPruneInterval = 360
 maxTransactionsPerBlock = 6'000
@@ -78,7 +78,7 @@ maxMosaicsPerAccount = 1'000
 maxMosaicDuration = 3650d
 maxMosaicDivisibility = 6
 
-mosaicRentalFeeSinkAddress = SBPJ3LE4SF7Y25RCEC6MA5BXBP6W2TGB2XKMIDY
+mosaicRentalFeeSinkAddress = TDGY4DD2U4YQQGERFMDQYHPYS6M7LHIF6XUCJ4Q
 mosaicRentalFee = 500
 
 [plugin:catapult.plugins.multisig]
@@ -99,7 +99,7 @@ maxNamespaceDuration = 365d
 namespaceGracePeriodDuration = 30d
 reservedRootNamespaceNames = xem, nem, user, account, org, com, biz, net, edu, mil, gov, info
 
-namespaceRentalFeeSinkAddress = SBPJ3LE4SF7Y25RCEC6MA5BXBP6W2TGB2XKMIDY
+namespaceRentalFeeSinkAddress = TDGY4DD2U4YQQGERFMDQYHPYS6M7LHIF6XUCJ4Q
 rootNamespaceRentalFeePerBlock = 1
 childNamespaceRentalFee = 100
 
