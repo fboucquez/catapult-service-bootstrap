@@ -1,4 +1,7 @@
 sleep 4
+
+echo "RUNNING prepare.sh"
+
 if [ ! -d /data ]; then
         echo "/data directory does not exist"
         exit 1

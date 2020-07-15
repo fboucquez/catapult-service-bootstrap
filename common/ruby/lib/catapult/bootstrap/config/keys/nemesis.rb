@@ -65,7 +65,7 @@ module Catapult::Bootstrap
         end
 
         def generation_hash
-          @generation_hash ||= get_key_info(KeyType.generation_hash).public
+          '7391E2EF993C70D2F52691A54411DA3BD1F77CF6D47B8C8D8832C890069AAAAA' # @generation_hash ||= get_key_info(KeyType.generation_hash).public
         end
 
         protected

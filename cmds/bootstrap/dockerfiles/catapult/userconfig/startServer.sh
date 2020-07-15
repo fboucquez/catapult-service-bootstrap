@@ -1,11 +1,13 @@
 #!/bin/bash
 
 ulimit -c unlimited
-cd /catapult
+cd /usr/catapult
 id -a
 ls -alh /data
 
 sleep 4
+
+echo "RUNNING startServer.sh"
 
 if [ ! -d /data ]; then
   echo "/data directory does not exist"

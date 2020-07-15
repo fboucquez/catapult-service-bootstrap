@@ -1,0 +1,35 @@
+#!/bin/bash
+set -e
+rootDir="$(dirname "$(realpath $0)")/.."
+outputFolder="${rootDir}/images"
+unzipImage() {
+  orga="$1"
+  image="$2"
+  version="$3"
+  echo "processing image $orga/$image:$version starts"
+  if [ ! -f "./images/$image.tar" ]; then
+    echo "Downloading docker image $orga/$image:$version"
+    docker save "$orga/$image:$version" > "$outputFolder/$image.tar"
+  fi
+  if [ ! -f "$outputFolder/$orga-$image-$version.aci" ]; then
+    echo "docker2aci docker image $orga/$image:$version"
+    docker2aci "$outputFolder/$image.tar"
+    mv "$orga-$image-$version.aci" $outputFolder
+  fi
+  if [ ! -d "$outputFolder/$image" ]; then
+    mkdir -p "$outputFolder/$image"
+    echo "unzipping $outputFolder/$orga-$image-$version.aci"
+    tar -xf "$outputFolder/$orga-$image-$version.aci" --directory "$outputFolder/$image"
+  fi
+  echo "processing image $orga/$image:$version ended"
+}
+
+if [[ "$1" == "reset" ]]; then
+    echo "Cleaning $outputFolder"
+    rm -rf "$outputFolder"
+fi
+
+mkdir -p "$outputFolder"
+unzipImage "symbolplatform" "symbol-rest-nightly" "latest"
+unzipImage "techbureau" "catapult-tools-private" "gcc-main-5f38cd2404"
+unzipImage "techbureau" "catapult-server-private" "gcc-main-5f38cd2404"

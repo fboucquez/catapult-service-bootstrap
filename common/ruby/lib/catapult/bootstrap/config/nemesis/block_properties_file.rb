@@ -17,7 +17,8 @@ module Catapult::Bootstrap
       require_relative('block_properties_file/template_bindings')
 
       CONFIG_FILENAME = 'block-properties-file.properties'
-      
+      OPT_IN_BALANCES_FILENAME = 'generated_balances_5.properties'
+
       def generate_and_write
         write_config_file(self.config_content)
       end
@@ -50,17 +51,25 @@ module Catapult::Bootstrap
       end
 
       def template_bindings
-        TemplateBindings.template_bindings(self.nemesis_keys_info, self.harvest_vrf_directory)
+        TemplateBindings.template_bindings(self.nemesis_keys_info, self.harvest_vrf_directory, self.opt_in_balances)
       end
 
       def template
         @template ||= File.open(self.template_file).read
       end
-      
+
+      def opt_in_balances
+        @opt_in_balances ||= File.open(self.opt_in_balance_file).read
+      end
+
       def template_file
         "#{Config.base_config_source_dir}/nemesis/#{CONFIG_FILENAME}.mt"
       end
-      
+
+      def opt_in_balance_file
+        "#{Config.base_config_source_dir}/nemesis/#{OPT_IN_BALANCES_FILENAME}"
+      end
+
       private
       
       def write_config_file(config_file)

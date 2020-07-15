@@ -44,6 +44,8 @@ isRestrictable = false
 {{#currency_distribution}}
 {{address}} = {{amount}}
 {{/currency_distribution}}
+{{opt_in_balances}}
+
 
 [mosaic>{{base_namespace}}:{{mosaic_name.harvesting}}]
 

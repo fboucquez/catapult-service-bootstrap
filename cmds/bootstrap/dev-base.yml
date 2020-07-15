@@ -33,7 +33,7 @@ services:
 
   store-addresses:
     build:
-      context: ../../ruby
+      context: ../../common/ruby
       dockerfile: Dockerfile-dev
 #    command: bash -c "sleep infinity"
     command: bash -c "/bin-mount/wait /addresses/raw-addresses.txt && /usr/app/bin/store-addresses-if-needed.rb /addresses/raw-addresses.txt /addresses/addresses.yaml 53"
@@ -44,7 +44,7 @@ services:
 
   setup-network:
     build:
-      context: ../../ruby
+      context: ../../common/ruby
       dockerfile: Dockerfile-dev
 #    command: bash -c "sleep infinity"
     command: bash -c "/bin-mount/wait /addresses/addresses.yaml && /usr/app/bin/generate-and-write-configurations.rb /addresses/addresses.yaml /config-build /nemesis && touch /state/configs-generated"

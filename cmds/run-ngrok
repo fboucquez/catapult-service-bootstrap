@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+ngrok  http 3000 -inspect=false -bind-tls=true --hostname $(whoami)-catapult-service-bootstrap.ngrok.io

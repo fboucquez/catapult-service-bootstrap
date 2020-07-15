@@ -14,6 +14,8 @@ while [ "$1" != "" ]; do
     esac
     shift
 done
-
+sudo ./cmds/clean-all
+sudo mkdir -p ./build/nemesis/vrf
+sudo cp -f ./transactions/* ./build/nemesis/vrf
 docker rm -f $(docker ps -aq)
 docker-compose -f cmds/bootstrap/docker-compose.yml up $daemon_flag $build_flag

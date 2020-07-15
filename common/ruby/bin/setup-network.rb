@@ -17,6 +17,14 @@ unless ARGV.size == 0
   STDERR << "Usage #{$0}\n"
   exit 1
 end
+
+# if (!ENV['ADDRESSES_DIR']) then
+#   ENV['ADDRESSES_DIR']="./build/generated-addresses"
+#   ENV['BASE_CONFIG_DIR']="./build/config-build"
+#   ENV['BASE_DATA_DIR']="./build/data"
+#   ENV['NEMESIS_DIR']="./build/nemesis"
+# end
+
 addresses_dir          = ENV['ADDRESSES_DIR'] || fail("Missing env var ADDRESSES_DIR")
 base_config_target_dir = ENV['BASE_CONFIG_DIR'] || fail("Missing env var BASE_CONFIG_DIR")
 base_data_dir          = ENV['BASE_DATA_DIR'] || fail("Missing env var BASE_DATA_DIR")

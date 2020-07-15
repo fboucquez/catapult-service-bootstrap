@@ -1,9 +1,19 @@
 #!/bin/bash
+set -e
 
-build_param=$1
+#sudo chown ${USER}:${USER} -R ./build
+#sudo chown ${USER}:${USER} -R ./data
 
-if [ "$build_param" == "--build" ]; then
-  docker-compose -f cmds/bootstrap/test-nemgen.yml up --build
-else
-  docker-compose -f cmds/bootstrap/test-nemgen.yml up
-fi
+#rootDir="$(dirname "$(realpath $0)")/.."
+#
+#sudo ln -s "${rootDir}/data" /data
+
+rm -rf ./data-nemgen
+mkdir -p ./data-nemgen/seed
+cp -r ./transactions/* ./build-nemgen/nemesis/vrf
+
+echo "RUNNING NEMGEN!!!"
+/usr/catapult/bin/catapult.tools.nemgen -r  ./build-nemgen/catapult-config/peer-node-0/userconfig --nemesisProperties ./build-nemgen/nemesis/block-properties-file.properties
+
+echo "RUNNING SERVER!!!"
+/usr/catapult/bin/catapult.server ./build-nemgen/catapult-config/peer-node-0/userconfig

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-build_flag=
+build_flag="--build"
 daemon_flag=
 
 while [ "$1" != "" ]; do
@@ -15,5 +15,7 @@ while [ "$1" != "" ]; do
     shift
 done
 
+sudo mkdir -p ./build/nemesis/vrf
+sudo cp -f ./transactions/* ./build/nemesis/vrf
 docker rm -f $(docker ps -aq)
-docker-compose -f cmds/bootstrap/dev-base.yml up $daemon_flag $build_flag
+docker-compose -f cmds/bootstrap/docker-compose.yml up $daemon_flag $build_flag --scale rest-gateway=0

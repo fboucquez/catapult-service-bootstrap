@@ -22,7 +22,7 @@ module Catapult::Bootstrap
       private
 
       def create_or_reset_vrf_directory
-        ::FileUtils.rm_rf self.harvest_vrf_directory
+        # ::FileUtils.rm_rf self.harvest_vrf_directory
         ::FileUtils.mkdir_p self.harvest_vrf_directory
 
       end

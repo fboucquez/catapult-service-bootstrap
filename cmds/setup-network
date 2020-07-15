@@ -1,9 +1,5 @@
 #!/bin/bash
-
-build_param=$1
-
-if [ "$build_param" == "--build" ]; then
-  docker-compose -f cmds/bootstrap/docker-compose-setup-network.yml up --build
-else
-  docker-compose -f cmds/bootstrap/docker-compose-setup-network.yml up
-fi
+sudo ./cmds/clean-all
+sudo mkdir -p ./build/nemesis/vrf
+sudo cp -f ./transactions/* ./build/nemesis/vrf
+docker-compose -f cmds/bootstrap/docker-compose.yml up --remove-orphans $1 setup-network
