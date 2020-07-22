@@ -1,6 +1,6 @@
 #!/bin/bash
 
-build_flag=
+build_flag="--build"
 daemon_flag=
 
 while [ "$1" != "" ]; do
@@ -15,5 +15,4 @@ while [ "$1" != "" ]; do
     shift
 done
 
-docker-compose -f cmds/docker/docker-compose.yml pull rest-gateway 
-docker-compose -f cmds/docker/docker-compose.yml up $daemon_flag $build_flag
+docker-compose -f cmds/bootstrap/docker-compose.yml up $daemon_flag $build_flag

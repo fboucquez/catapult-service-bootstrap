@@ -1,7 +1,7 @@
 [Japanese README](https://github.com/tech-bureau/catapult-service-bootstrap/blob/master/README.ja.md)
 
 
-# Catapult Service Bootstrap
+# Catapult Service Bootstrap for versions 0.9.6.x
 
 This repo contains a set of bootstrap and setup scripts to help developers get going quickly with their own working Catapult Service.  The goal is to make it as easy and quick as possible so as a developer you only have to run this setup and within a minute or so you will have a running server ready to start receiving transactions so you can focus on your development work and not setup or configuring servers.
 
@@ -9,7 +9,7 @@ NOTE: this bootstrap setup is for learning and development purposes, it should n
 
 We use docker images as our default packaging and distribution mechanism.  These bootstrap scripts will prepare some files on disk and then leverage docker-compose to startup and run the needed set of containers so the server can function correctly.
 
-NOTE: after releases with docker image updates, or if switching between versions it is typical to need to build new images when starting the docker services, this can be done by passing the `-b` flag to any of the commands which will pass to docker-compose.  Should you run into weird behavior sometimes it helps or is required to clear out old images, this can be done with the `docker system prune -a` command, this will purge all container references and force download and build on next run.
+NOTE: for versions 0.9.4.x+ some docker networking configuration has been updated for setting up the rest gateway as a white listed client to the api server. Docker networking can sometimes result in different behavior across environments, the `--build` flag is passed automatically to the start command which seems to aleviate the networking odities in some environments.
 
 ## Evironment Dependencies
 
@@ -41,27 +41,10 @@ You can verify things are running by doing a quick curl request to get block inf
 
 To stop the server simply press `Ctrl+c` to kill/stop the foreground docker process.
 
-## Updated Dragon Bootstrap
-
-This setup of the bootstrap tool has been updated to support the latest dragon builds.
-
-The main difference in the bootstrap setup is the organization of the cmds/ folder which has a set of shell scripts for performing various actions.
-
-The previous `./clean-all` and `./clean-data` scripts have been moved to `./cmds/clean-all` and `./cmds/clean-data`
-
-Other changes are there are now docker compose files for all services together, like before, but also individual services such as peer nodes, api database, api node + gateway and the new broker service.
-
-### New Broker Service
-
-The big change in latest dragon build and going forward is the introduction of the broker service.  Previously the api node would use the mongo extension plugin to take data written to the chain and copy it to the mongodb setup.  This make the api node more complex and had implications on api node performance and potential issues with failure scenarios.
-
-Now the api node writes to a "spool" directory that is a shared state location on disk.  As the aspi node writes to the spool/ directory, the broker service will read from the /spool directory and take over persiting the chain information into mongodb for api gateway read calls.
-
-NOTE: broker runs on same node and under same config/directory as the api node
-
 ### Recovery Tool
 
-There is another new binary in the build for the catapult-server called the recovery tool.  This tools main job is to be run after an unclean shutdown, or after failure, of a node, particularly the api node.  When either the server.lock or broker.lock file(s) are present it typically means that there was an unclean shutdown or failure.  The recovery tool will look at the files on disk under the spool/ folder, clean up the files and sync the data to mongodb, and if all runs okay it will finally delete the lock files and shutdown.
+NOTE: recovery is run before each start. If recovery fails it typically means a network resync is needed. 
+
 
 ## Bootstrap Scripts/Commands
 
@@ -99,6 +82,10 @@ The file `addresses.yaml` are keys from the `raw-addresses.txt` file but formatt
 
 NOTE: the keys under the yaml key 'nemesis_addresses', which are the keys that are assigned test xem funds as part of the nemesis block generation.
 
+### TLS Certificate Setup
+
+Starting in version 0.9.4.1 the server uses TLS 1.3 for peer/server communication. On start up the first time certifications are generated for each service which will set the identity key for itself. Certificate files are generated and located under the `<service>/userconfig/resource/cert` directories.
+
 ## Starting as a Background Process
 
 Pass a `-d` flag to any of the start commands
@@ -126,3 +113,4 @@ If your service is in a bad state, or you just want to restart from fresh again 
 
 The Catapult cache and query engine is powered by mongodb.  There are some known issues with the latest storage engine in some docker environments.  The previous temporary fix was to use an older version with a custom docker compose file, that has been removed in the dragon release, please submit an issue if running into it and we can look at resurecting it.
 
+It has been reported that some older hosting and x86 chipsets are failing to start services. Currently main build targets for server releases are for more modern chipsets, if experiencing issues please report in the community developer slack group.
