@@ -1,1 +1,0 @@
-FROM fboucquez/catapult-rest
