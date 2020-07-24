@@ -16,8 +16,8 @@ module Catapult::Bootstrap
     class BlockPropertiesFile
       module TemplateBindings
         XEM_TOTAL_SUPPLY   = "8'998'999'998'000'000"
-	XEM_ACCOUNT_SUPPLY = "449'949'999'900'000"
-        XEM_NUM_OF_ACCOUNTS = 20 # this has to equal ratio XEM_TOTAL_SUPPLY/XEM_ACCOUNT_SUPPLY
+	      XEM_ACCOUNT_SUPPLY = "449'949'999'900'000" # Leaving a gap for opted in balance
+        XEM_NUM_OF_ACCOUNTS = 10 # this has to equal ratio XEM_TOTAL_SUPPLY/XEM_ACCOUNT_SUPPLY
 
         def self.template_bindings(nemesis_keys_info, harvest_vrf_directory, opt_in_balances)
           key_info_array = nemesis_keys_info.key_info_array
@@ -37,31 +37,31 @@ module Catapult::Bootstrap
         end
 
         # nemesis_keys_info = Config::Keys::Nemesis.get_nemesis_keys_info(self.keys_handle)
-        
+
         private
-        
+
         # TODO: hard coding until we figure out how to dynamically compute the mosaic ids in network config
         NUM_HARVEST_KEYS       = 4
         HARVEST_ACCOUNT_SUPPLY = "3'750'000"
         def self.harvesting_distribution(key_info_array)
           key_info_array[0...NUM_HARVEST_KEYS].map { |key_info| distribution(key_info, HARVEST_ACCOUNT_SUPPLY) }
         end
-        
-        NUM_CURRENCY_KEYS       = 5 # this has to equal ratio XEM_TOTAL_SUPPLY/XEM_ACCOUNT_SUPPLY (default 20)
+
+        NUM_CURRENCY_KEYS       = 10 # this has to equal ratio XEM_TOTAL_SUPPLY/XEM_ACCOUNT_SUPPLY (default 10 leaving space for opt in balances)
         CURRENCY_ACCOUNT_SUPPLY = XEM_ACCOUNT_SUPPLY
         def self.currency_distribution(key_info_array)
           key_info_array[0...NUM_CURRENCY_KEYS].map { |key_info| distribution(key_info, CURRENCY_ACCOUNT_SUPPLY) }
         end
-        
+
         def self.distribution(key_info, amount)
           {
             address: key_info.address,
             amount:  amount
           }
         end
-        
+
       end
-      
+
     end
   end
 end

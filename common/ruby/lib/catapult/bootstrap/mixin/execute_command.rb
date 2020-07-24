@@ -12,6 +12,7 @@ module Catapult::Bootstrap
       ExecuteInfo = Struct.new(:stdout, :stderr, :status)
       def execute_command_all_info(command_string, timeout: nil)
         # Using Frontkick for timeout capability
+        puts command_string
         result = ::Frontkick.exec(command_string, timeout: timeout)
         if result.status == 0
           ExecuteInfo.new(result.stdout, result.stderr, result.status)

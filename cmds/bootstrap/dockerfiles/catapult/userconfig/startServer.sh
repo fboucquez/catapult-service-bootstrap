@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ulimit -c unlimited
-cd /usr/catapult
+cd /catapult
 id -a
 ls -alh /data
 

@@ -17,7 +17,7 @@ module Catapult::Bootstrap
       require_relative('block_properties_file/template_bindings')
 
       CONFIG_FILENAME = 'block-properties-file.properties'
-      OPT_IN_BALANCES_FILENAME = 'generated_balances_5.properties'
+      OPT_IN_BALANCES_FILENAME = 'generated_balances.properties'
 
       def generate_and_write
         write_config_file(self.config_content)
