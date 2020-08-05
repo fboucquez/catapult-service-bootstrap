@@ -1,9 +1,3 @@
 #!/bin/bash
-
-build_param=$1
-
-if [ "$build_param" == "--build" ]; then
-  docker-compose -f cmds/bootstrap/docker-compose-setup-network.yml up --build
-else
-  docker-compose -f cmds/bootstrap/docker-compose-setup-network.yml up
-fi
+sudo ./cmds/clean-all
+docker-compose -f cmds/bootstrap/docker-compose.yml up --remove-orphans $1 setup-network

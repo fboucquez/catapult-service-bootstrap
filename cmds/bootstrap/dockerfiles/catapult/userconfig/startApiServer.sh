@@ -5,6 +5,8 @@ cd /catapult
 id -a
 ls -alh /data
 
+echo "RUNNING startApiServer.sh"
+
 if [ -e "/state/api-node-0" ]; then
   rm -f /state/api-node-0
 fi

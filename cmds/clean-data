@@ -1,3 +1,6 @@
 #!/bin/bash
-find data/* | grep -v "README.md" | xargs rm -rf
+set -e
 
+rootDir="$(dirname "$(realpath $0)")/.."
+rm -rf "${rootDir}/data"
+echo "data folder removed"

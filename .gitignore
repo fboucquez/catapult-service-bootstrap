@@ -14,3 +14,7 @@ ruby/*.gem
 ruby/spec/config_generation/output
 *.bak
 /.idea/
+/images/
+/build-nemgen/
+/data-nemgen/
+/logs/

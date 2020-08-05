@@ -7,6 +7,8 @@ ls -alh /data
 
 sleep 4
 
+echo "RUNNING startServer.sh"
+
 if [ ! -d /data ]; then
   echo "/data directory does not exist"
   exit 1

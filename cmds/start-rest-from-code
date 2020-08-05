@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Running rest from the source code located one level up of this working dir.
 
 currentPath=$(pwd)
 restPath=$(pwd)/../catapult-rest
