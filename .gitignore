@@ -18,3 +18,4 @@ ruby/spec/config_generation/output
 /build-nemgen/
 /data-nemgen/
 /logs/
+/.idea/
