@@ -119,7 +119,7 @@ services:
     - api-node-broker-0
 
   rest-gateway:
-    image: symbolplatform/symbol-rest:1.2.0-alpha
+    image: symbolplatform/symbol-rest:1.2.0
     command: ash -c "/bin-mount/wait /state/network-is-setup && npm start /userconfig/rest.json"
     stop_signal: SIGINT
     ports:
